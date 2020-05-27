@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
 import createError from 'http-errors';
+import { authRouter } from './routes/auth.router';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', userRouter);
+app.use('/auth/', authRouter);
 
 // catch 404 and forward to error handler
 
