@@ -4,14 +4,20 @@ import { randomBytes } from 'crypto';
 import User from '../models/user';
 
 export default class AuthService {
-  public async SignUp(userInputDTO: IUserInputDTO) {
+  public async signUp(userInputDTO: IUserInputDTO) {
     const salt = randomBytes(32);
     const hashedPassword = await argon2.hash(userInputDTO.password, { salt });
-    return await User.create({
+    const newUser = new User({
       ...userInputDTO,
       salt: salt.toString('hex'),
       password: hashedPassword,
     });
+    try{
+      await newUser.save();
+    } catch (e) {
+      return e
+    }
+    return newUser;
   }
 
   login(username: string, password: string, done: any) {

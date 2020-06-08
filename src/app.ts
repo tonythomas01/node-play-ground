@@ -2,19 +2,23 @@ import express from 'express';
 import cors from 'cors';
 import { indexRouter } from './routes/index.router';
 import { userRouter } from './routes/users.router';
-
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
 import logger from 'morgan';
-
+import connectDB from '../config/dbConnection';
 import createError from 'http-errors';
 import { authRouter } from './routes/auth.router';
 
-const app = express();
+import './services/passport.strategy';
 
+const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+connectDB();
 
 app.use(cors());
 app.use(logger('dev'));
@@ -23,6 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static('public'));
+app.use(session({ secret: 'keyboard cat' }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', userRouter);
 app.use('/auth/', authRouter);
