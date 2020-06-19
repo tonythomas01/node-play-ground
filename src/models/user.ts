@@ -40,31 +40,37 @@ const User = new mongoose.Schema(
   }
 );
 
-User.methods.setPassword = async function(password: string) {
+User.methods.setPassword = async function (password: string) {
   const salt = randomBytes(32);
   this.password = await argon2.hash(password, { salt });
   this.salt = salt.toString('hex');
-}
-User.methods.comparePassword = async (password: string, hashedPassword: string) => {
+};
+User.methods.comparePassword = async (
+  password: string,
+  hashedPassword: string
+) => {
   const pass = Buffer.from(password);
   try {
     return await argon2.verify(hashedPassword, pass);
   } catch (e) {
     return false;
   }
-}
-User.methods.generateJWT = function() {
+};
+User.methods.generateJWT = function () {
   const today = new Date();
   const expirationDate = new Date(today);
   expirationDate.setDate(today.getDate() + 10);
 
-  return jwt.sign({
-    email: this.email,
-    id: this._id,
-    exp: parseInt(String(expirationDate.getTime() / 1000), 10),
-  }, 'secret');
-}
-User.methods.toAuthJSON = function() {
+  return jwt.sign(
+    {
+      email: this.email,
+      id: this._id,
+      exp: parseInt(String(expirationDate.getTime() / 1000), 10),
+    },
+    'secret'
+  );
+};
+User.methods.toAuthJSON = function () {
   return {
     _id: this._id,
     email: this.email,

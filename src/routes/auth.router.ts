@@ -1,13 +1,15 @@
 import express from 'express';
 import passport from 'passport';
-import * as auth from './auth';
+import {authMiddlewareService} from '../services/auth.middleware.service';
 
 export const authRouter = express.Router();
 
 /* GET users listing. */
-authRouter.post(
-  '/login', auth.optional, (req, res, next) => {
-    return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+authRouter.post('/login', authMiddlewareService.optional, (req, res, next) => {
+  return passport.authenticate(
+    'local',
+    { session: false },
+    (err, passportUser, info) => {
       if (err) {
         return next(err);
       }
@@ -17,7 +19,8 @@ authRouter.post(
         return res.json({ user: user.toAuthJSON() });
       }
       return res.status(400).json({
-        errors: info
+        errors: info,
       });
-    })(req, res, next);
-  });
+    }
+  )(req, res, next);
+});

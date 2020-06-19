@@ -1,15 +1,17 @@
 import jwt from 'express-jwt';
 
 const getTokenFromHeaders = (req: any) => {
-  const { headers: { authorization } } = req;
+  const {
+    headers: { authorization },
+  } = req;
 
-  if(authorization && authorization.split(' ')[0] === 'Token') {
+  if (authorization && authorization.split(' ')[0] === 'Token') {
     return authorization.split(' ')[1];
   }
   return null;
 };
 
-const auth = {
+const authMiddlewareService = {
   required: jwt({
     secret: 'secret',
     userProperty: 'payload',
@@ -22,5 +24,4 @@ const auth = {
     credentialsRequired: false,
   }),
 };
-
-module.exports = auth;
+export {authMiddlewareService};

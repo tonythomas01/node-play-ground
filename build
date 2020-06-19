@@ -7,7 +7,7 @@ var getTokenFromHeaders = function (req) {
     }
     return null;
 };
-var auth = {
+var authMiddlewareService = {
     required: jwt({
         secret: 'secret',
         userProperty: 'payload',
@@ -20,5 +20,5 @@ var auth = {
         credentialsRequired: false,
     }),
 };
-module.exports = auth;
+module.exports = authMiddlewareService;
 //# sourceMappingURL=build.map
