@@ -6,6 +6,6 @@ export default class UserService {
   }
 
   public async GetUser(userId: string) {
-    return User.findById(userId)
+    return User.findById(userId);
   }
 }

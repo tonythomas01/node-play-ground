@@ -10,11 +10,11 @@ userRouter.get('/', async (req, res, next) => {
   const users = await userService.ListUsers();
   return res.json(users);
 });
-userRouter.get('/:userId', (async (req, res) => {
+userRouter.get('/:userId', async (req, res) => {
   const userService = new UserService();
   const user = await userService.GetUser(req.params.userId);
   return res.json(user);
-}));
+});
 
 userRouter.post('/', async (req, res, next) => {
   const authService = new AuthService();

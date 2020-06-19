@@ -32,8 +32,8 @@ const User = new mongoose.Schema(
         delete ret.updatedAt;
         delete ret.password;
         return ret;
-      }
-    }
+      },
+    },
   }
 );
 export default mongoose.model<IUser & mongoose.Document>('User', User);
