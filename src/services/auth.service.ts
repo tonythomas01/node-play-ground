@@ -12,10 +12,10 @@ export default class AuthService {
       salt: salt.toString('hex'),
       password: hashedPassword,
     });
-    try{
+    try {
       await newUser.save();
     } catch (e) {
-      return e
+      return e;
     }
     return newUser;
   }

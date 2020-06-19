@@ -1,23 +1,23 @@
 import express from 'express';
-export const userRouter = express.Router();
-import passport from 'passport';
 import AuthService from '../services/auth.service';
-import { IUser, IUserInputDTO } from '../interfaces/iuser';
-import * as mongoose from 'mongoose';
+import UserService from '../services/user.service';
+
+export const userRouter = express.Router();
 
 /* GET users listing. */
-userRouter.get('/', (req, res, next) => {
-  res.send('respond with a resource');
+userRouter.get('/', async (req, res, next) => {
+  const userService = new UserService();
+  const users = await userService.ListUsers();
+  return res.json(users);
 });
+userRouter.get('/:userId', (async (req, res) => {
+  const userService = new UserService();
+  const user = await userService.GetUser(req.params.userId);
+  return res.json(user);
+}));
 
-userRouter.post(
-  '/',
-  (req, res, next) => {
-    const authService = new AuthService();
-    let userCreated: Promise<IUser & mongoose.Document>;
-    userCreated = authService.signUp(req.body);
-    userCreated.then(value => {
-      res.json(value);
-    });
-  }
-);
+userRouter.post('/', async (req, res, next) => {
+  const authService = new AuthService();
+  const userCreated = await authService.signUp(req.body);
+  return res.json(userCreated);
+});
