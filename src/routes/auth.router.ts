@@ -1,6 +1,6 @@
 import express from 'express';
 import passport from 'passport';
-import {authMiddlewareService} from '../services/auth.middleware.service';
+import { authMiddlewareService } from '../services/auth.middleware.service';
 
 export const authRouter = express.Router();
 

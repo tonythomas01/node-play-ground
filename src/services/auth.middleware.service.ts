@@ -24,4 +24,4 @@ const authMiddlewareService = {
     credentialsRequired: false,
   }),
 };
-export {authMiddlewareService};
+export { authMiddlewareService };
