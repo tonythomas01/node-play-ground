@@ -32,20 +32,19 @@ export default class AuthService {
   }
 
   public async login(email: string, password: string, done: any) {
-    User.findOne({ 'email': email }, (err, user) => {
+    User.findOne({ email: email }, (err, user) => {
       if (err) {
         return done(err);
       }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      this.comparePassword(password, user.password).then(result => {
+      this.comparePassword(password, user.password).then((result) => {
         if (!result) {
-          return done(null, false, {message: 'Incorrect password.'})
+          return done(null, false, { message: 'Incorrect password.' });
         }
-      })
-
-      return done(null, user);
+        return done(null, user);
+      });
     });
   }
 }

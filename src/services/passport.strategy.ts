@@ -4,11 +4,13 @@ import AuthService from '../services/auth.service';
 import User from '../models/user';
 
 passport.use(
-  new LocalStrategy({ usernameField: 'email'},
+  new LocalStrategy(
+    { usernameField: 'email' },
     async (email: string, password: string, done) => {
-    const authService = new AuthService();
-    return authService.login(email, password, done);
-  })
+      const authService = new AuthService();
+      return authService.login(email, password, done);
+    }
+  )
 );
 
 passport.serializeUser((user: any, done) => {
