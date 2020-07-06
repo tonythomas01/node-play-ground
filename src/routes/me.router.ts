@@ -16,8 +16,12 @@ export const meRouter = express.Router();
 //   return res.json(user);
 // });
 
-meRouter.post('/rooms/', authMiddlewareService.required, async (req, res, next) => {
-  const meRoomsService = new MeRoomsService();
-  const roomCreated = await meRoomsService.createRoom(req.body, req.user);
-  return res.json(roomCreated);
-});
+meRouter.post(
+  '/rooms/',
+  authMiddlewareService.required,
+  async (req, res, next) => {
+    const meRoomsService = new MeRoomsService();
+    const roomCreated = await meRoomsService.createRoom(req.body, req.user);
+    return res.json(roomCreated);
+  }
+);

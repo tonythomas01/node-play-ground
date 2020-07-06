@@ -12,7 +12,7 @@ export default class MeRoomsService {
     try {
       await newRoom.save();
     } catch (e) {
-      return (e);
+      return e;
     }
     return newRoom;
   }

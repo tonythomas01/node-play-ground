@@ -1,29 +1,27 @@
 import mongoose from 'mongoose';
 import { IRoom } from '../interfaces/iroom';
 
-const AddressSchema = new mongoose.Schema(
-  {
-    title: {
+const AddressSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  placeId: {
+    type: String,
+    required: false,
+  },
+  location: {
+    type: {
       type: String,
+      enum: ['Point'],
       required: true,
     },
-    placeId: {
-      type: String,
-      required: false,
+    coordinates: {
+      type: [Number],
+      required: true,
     },
-    location: {
-      type: {
-        type: String,
-        enum: ['Point'],
-        required: true
-      },
-      coordinates: {
-        type: [Number],
-        required: true
-      },
-    },
-  }
-)
+  },
+});
 
 const Room = new mongoose.Schema(
   {
@@ -34,7 +32,7 @@ const Room = new mongoose.Schema(
     address: AddressSchema,
     isPublic: {
       type: Boolean,
-      default: true
+      default: true,
     },
     code: {
       type: Number,
@@ -43,9 +41,9 @@ const Room = new mongoose.Schema(
       maxlength: 4,
       minlength: 4,
     },
-    owner:  {
+    owner: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'User',
     },
   },
   {
@@ -62,6 +60,6 @@ const Room = new mongoose.Schema(
   }
 );
 Room.methods.generateCode = async function f() {
-  this.code = Math.floor(Math.random() * 9000 + 1000)
+  this.code = Math.floor(Math.random() * 9000 + 1000);
 };
 export default mongoose.model<IRoom & mongoose.Document>('Room', Room);
