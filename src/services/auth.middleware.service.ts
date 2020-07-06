@@ -14,12 +14,12 @@ const getTokenFromHeaders = (req: any) => {
 const authMiddlewareService = {
   required: jwt({
     secret: 'secret',
-    userProperty: 'payload',
+    userProperty: 'user',
     getToken: getTokenFromHeaders,
   }),
   optional: jwt({
     secret: 'secret',
-    userProperty: 'payload',
+    userProperty: 'user',
     getToken: getTokenFromHeaders,
     credentialsRequired: false,
   }),
