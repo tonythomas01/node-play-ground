@@ -41,7 +41,7 @@ const Room = new mongoose.Schema(
       maxlength: 4,
       minlength: 4,
     },
-    owner: {
+    owner_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },

@@ -1,6 +1,4 @@
 import { IUserInputDTO } from '../interfaces/iuser';
-import argon2 from 'argon2';
-import { randomBytes } from 'crypto';
 import User from '../models/user';
 
 export default class AuthService {
