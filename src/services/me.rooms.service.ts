@@ -25,8 +25,8 @@ export default class MeRoomsService {
 
   public async getMeRooms() {
     return Room.find({
-      'owner_id': this.user.id
-    })
+      owner_id: this.user.id,
+    });
   }
 
   public async serializeRooms(rooms) {
@@ -36,12 +36,12 @@ export default class MeRoomsService {
     });
 
     const users = await User.find({
-      _id: userIdsArray
+      _id: userIdsArray,
     });
 
     return {
       rooms,
-      owners: users
-    }
+      owners: users,
+    };
   }
 }

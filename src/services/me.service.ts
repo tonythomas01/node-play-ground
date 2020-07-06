@@ -9,7 +9,7 @@ export default class MeService {
 
   public async getMe() {
     return User.findById({
-      _id: this.user.id
-    })
+      _id: this.user.id,
+    });
   }
 }

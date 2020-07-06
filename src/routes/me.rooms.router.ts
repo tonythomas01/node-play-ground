@@ -25,4 +25,4 @@ meRoomsRouter.get(
     const meRoomsResponse = await meRoomsService.serializeRooms(meRooms);
     return res.json(meRoomsResponse);
   }
-)
+);
