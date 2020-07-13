@@ -8,12 +8,12 @@ import { authMiddlewareService } from '../services/auth.middleware.service';
 /* GET users listing. */
 userRouter.get('/', authMiddlewareService.required, async (req, res, next) => {
   const userService = new UserService();
-  const users = await userService.ListUsers();
+  const users = await userService.listUsers();
   return res.json(users);
 });
 userRouter.get('/:userId', authMiddlewareService.required, async (req, res) => {
   const userService = new UserService();
-  const user = await userService.GetUser(req.params.userId);
+  const user = await userService.getUser(req.params.userId);
   return res.json(user);
 });
 

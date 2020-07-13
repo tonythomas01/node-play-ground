@@ -1,13 +1,7 @@
-export interface IUser {
-  _id: string;
+import {Document}  from 'mongoose';
+export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
   salt: string;
-}
-
-export interface IUserInputDTO {
-  name: string;
-  email: string;
-  password: string;
 }

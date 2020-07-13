@@ -77,4 +77,4 @@ User.methods.toAuthJSON = function () {
     token: this.generateJWT(),
   };
 };
-export default mongoose.model<IUser & mongoose.Document>('User', User);
+export default mongoose.model<IUser>('User', User);

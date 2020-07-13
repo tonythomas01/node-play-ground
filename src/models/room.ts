@@ -60,4 +60,4 @@ const Room = new mongoose.Schema(
 Room.methods.generateCode = async function f() {
   this.code = Math.floor(Math.random() * 9000 + 1000);
 };
-export default mongoose.model<IRoom & mongoose.Document>('Room', Room);
+export default mongoose.model<IRoom>('Room', Room);

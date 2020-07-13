@@ -1,1 +1,1 @@
-{"version":3,"file":"build","sourceRoot":"","sources":["src/routes/me.rooms.router.ts"],"names":[],"mappings":""}
+{"version":3,"file":"build","sourceRoot":"","sources":["src/services/rooms.service.ts"],"names":[],"mappings":""}

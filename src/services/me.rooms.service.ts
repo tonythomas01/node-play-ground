@@ -1,16 +1,18 @@
-import { IRoomInputDTO } from '../interfaces/iroom';
+import { IRoom } from '../interfaces/iroom';
 import Room from '../models/room';
-import User from '../models/user';
+import RoomsService from './rooms.service';
+import { IUser } from '../interfaces/iuser';
 
-export default class MeRoomsService {
-  private user: User;
+export default class MeRoomsService extends RoomsService{
+  private user: IUser;
 
   constructor(user: any) {
+    super();
     this.user = user;
   }
 
-  public async createRoom(roomInputDTO: IRoomInputDTO) {
-    const newRoom: Room = new Room({
+  public async createRoom(roomInputDTO: IRoom) {
+    const newRoom: IRoom = new Room({
       ...roomInputDTO,
       owner_id: this.user.id,
     });
@@ -27,21 +29,5 @@ export default class MeRoomsService {
     return Room.find({
       owner_id: this.user.id,
     });
-  }
-
-  public async serializeRooms(rooms) {
-    const userIdsArray: any[string] = [];
-    rooms.forEach((element: Room) => {
-      userIdsArray.push(element.owner_id);
-    });
-
-    const users = await User.find({
-      _id: userIdsArray,
-    });
-
-    return {
-      rooms,
-      owners: users,
-    };
   }
 }

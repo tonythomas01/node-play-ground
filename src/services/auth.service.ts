@@ -1,8 +1,8 @@
-import { IUserInputDTO } from '../interfaces/iuser';
+import { IUser } from '../interfaces/iuser';
 import User from '../models/user';
 
 export default class AuthService {
-  public async signUp(userInputDTO: IUserInputDTO) {
+  public async signUp(userInputDTO: IUser) {
     const newUser = new User({
       ...userInputDTO,
     });
@@ -16,7 +16,7 @@ export default class AuthService {
     return newUser;
   }
   public async login(email: string, password: string, done: any) {
-    User.findOne({ email: email }, (err, user) => {
+    User.findOne({ email }, (err, user: IUser | null) => {
       if (err) {
         return done(err);
       }
