@@ -1,35 +1,33 @@
 import mongoose from 'mongoose';
 import { IRoom } from '../interfaces/iroom';
 
-const AddressSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  placeId: {
-    type: String,
-    required: false,
-  },
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true,
-    },
-    coordinates: {
-      type: [Number],
-      required: true,
-    },
-  },
-});
-
 const Room = new mongoose.Schema(
   {
     name: {
       type: String,
       required: [true, 'Please enter a room name'],
     },
-    address: AddressSchema,
+    address: {
+      title: {
+        type: String,
+        required: true,
+      },
+      placeId: {
+        type: String,
+        required: false,
+      },
+      location: {
+        type: {
+          type: String,
+          enum: ['Point'],
+          required: true,
+        },
+        coordinates: {
+          type: [Number],
+          required: true,
+        },
+      },
+    },
     isPublic: {
       type: Boolean,
       default: true,
