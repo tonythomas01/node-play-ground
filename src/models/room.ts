@@ -45,8 +45,8 @@ const Room = new mongoose.Schema(
     },
     roomMatesCount: {
       type: Number,
-      min: 0
-    }
+      min: 0,
+    },
   },
   {
     timestamps: true,

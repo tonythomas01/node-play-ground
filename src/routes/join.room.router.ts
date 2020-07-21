@@ -8,13 +8,13 @@ joinRoomRouter.post(
   '/',
   authMiddlewareService.required,
   async (req, res, next) => {
-      const joinRoomService = new JoinroomService(req.user);
-      try {
-        const room = await joinRoomService.joinRoom(req.body);
-      } catch (e) {
-        next(e)
-      }
-      const roomsResponse = await joinRoomService.serializeRooms([room]);
-      return res.json(roomsResponse);
+    const joinRoomService = new JoinroomService(req.user);
+    try {
+      const room = await joinRoomService.joinRoom(req.body);
+    } catch (e) {
+      next(e);
+    }
+    const roomsResponse = await joinRoomService.serializeRooms([room]);
+    return res.json(roomsResponse);
   }
 );

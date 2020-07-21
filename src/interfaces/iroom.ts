@@ -14,7 +14,6 @@ export interface IRoom extends Document {
   isPublic: boolean;
   code: number;
   owner_id: IUser['_id'];
-
 }
 export interface IRoomInputDTO {
   name: IRoom['name'];
