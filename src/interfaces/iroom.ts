@@ -1,4 +1,4 @@
-import {Document}  from 'mongoose';
+import { Document } from 'mongoose';
 import { IUser } from './iuser';
 
 export interface IRoom extends Document {
@@ -14,9 +14,10 @@ export interface IRoom extends Document {
   isPublic: boolean;
   code: number;
   owner_id: IUser['_id'];
+
 }
 export interface IRoomInputDTO {
   name: IRoom['name'];
-  address: IRoom['address']
+  address: IRoom['address'];
   isPublic: IRoom['isPublic'];
 }

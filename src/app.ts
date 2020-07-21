@@ -15,6 +15,7 @@ import './services/passport.strategy';
 import { meRouter } from './routes/me.router';
 import { meRoomsRouter } from './routes/me.rooms.router';
 import { roomsRouter } from './routes/rooms.router';
+import { joinRoomRouter } from './routes/join.room.router';
 
 const app = express();
 // view engine setup
@@ -41,6 +42,7 @@ app.use('/users/', userRouter);
 app.use('/auth/', authRouter);
 app.use('/me/rooms/', meRoomsRouter);
 app.use('/rooms/', roomsRouter);
+app.use('/join-room/', joinRoomRouter);
 app.use('/me/', meRouter);
 
 // catch 404 and forward to error handler

@@ -3,7 +3,7 @@ import Room from '../models/room';
 import RoomsService from './rooms.service';
 import { IUser } from '../interfaces/iuser';
 
-export default class MeRoomsService extends RoomsService{
+export default class MeRoomsService extends RoomsService {
   private user: IUser;
 
   constructor(user: any) {
@@ -16,6 +16,7 @@ export default class MeRoomsService extends RoomsService{
       ...roomInputDTO,
       owner_id: this.user.id,
     });
+    // @ts-ignore
     await newRoom.generateCode();
     try {
       await newRoom.save();
